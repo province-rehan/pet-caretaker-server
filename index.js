@@ -172,6 +172,14 @@ async function run() {
       const cart = await cartCollection.find(query).toArray();
       res.send(cart);
     });
+
+    // cart delete by email
+    app.delete("/carts", async (req, res) => {
+      const email = req.query.email;
+      const query = { userEmail: email };
+      const cart = await cartCollection.deleteMany(query);
+      res.send(cart);
+    });
     // all cart
     app.get("/allcart", async (req, res) => {
       const query = {};
@@ -205,6 +213,13 @@ async function run() {
       const query = {};
       const result = await paymentCollection.find(query).toArray();
       res.send(result);
+    });
+    // payment by email
+    app.get("/payments", async (req, res) => {
+      const email = req.query.email;
+      const query = { userEmail: email };
+      const payments = await paymentCollection.find(query).toArray();
+      res.send(payments);
     });
     // post for pet adapter
     app.post("/postpet", async (req, res) => {
