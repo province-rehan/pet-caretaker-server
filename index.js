@@ -246,6 +246,12 @@ async function run() {
       const result = await receiverDataCollection.find(query).toArray();
       res.send(result);
     });
+    app.get("/pet", async (req, res) => {
+      const petName = req.query.petName;
+      const query = { petCategory: petName };
+      const result = await postPetCollection.find(query).toArray();
+      res.send(result);
+    })
   } finally {
     // Ensures that the client will close when you finish/error
     // await client.close();
